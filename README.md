@@ -1,6 +1,29 @@
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
+# What is implemented?
+
+- Deserialistion of markdown
+  - Headlines works
+  - Codeblock works
+  - Text works with
+    - InlineCode detection
+    - InlineMath detection
+    - Bold Text
+    - Italic Text
+    - Bold and Italic Text
+  - Ordered Lists
+  - Unordered Lists
+  - Empty Lines
+
+# What is still missing?
+- Serialisation of Markdown
+- Deserialisation of Markdown
+  - Tables
+  - Images
+  - Horizontal Lines
+  - Quotes
+
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation process
