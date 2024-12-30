@@ -1,10 +1,12 @@
+using System;
+
 namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
 
-public class TextNormal : MarkdownObject
+public class TextScratched : MarkdownObject
 {
     public string Content { get; private set; }
 
-    public TextNormal(string content)
+    public TextScratched(string content)
     {
         this.Content = content;
     }
@@ -16,6 +18,6 @@ public class TextNormal : MarkdownObject
 
     public new string Serialize()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

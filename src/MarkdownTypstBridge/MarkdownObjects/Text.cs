@@ -7,22 +7,22 @@ using MarkdownTypstBridge.MarkdownObjects.TextElements;
 
 namespace MarkdownTypstBridge.MarkdownObjects;
 
-public class Text
+public class Text : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)";
-    public object[] Content { get; private set; }
+    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~";
+    public MarkdownObject[] Content { get; private set; }
 
     public Text(string line)
     {
         Content = DestructLineIntoTextElements(line);
     }
 
-    private object[] DestructLineIntoTextElements(string line)
+    private MarkdownObject[] DestructLineIntoTextElements(string line)
     {
         var matches = Regex.Matches(line, REGEX_PATTERN);
         int positionInLine = 0;
 
-        List<object> returnObjects = [];
+        List<MarkdownObject> returnObjects = [];
         foreach (Match match in matches)
         {
             returnObjects.Add(new TextNormal(line.Substring(positionInLine, match.Index - positionInLine)));
@@ -54,9 +54,14 @@ public class Text
                 returnObjects.Add(new TextItalic(match.Groups[9].Value + match.Groups[10].Value));
             }
             // HyperRef
-            else if (!string.IsNullOrEmpty(match.Groups[11].Value))
+            else if (!string.IsNullOrEmpty(match.Groups[12].Value))
             {
-                returnObjects.Add(new TextNormal(match.Groups[11].Value));
+                returnObjects.Add(new HyperRef(alias: match.Groups[11].Value, hyperRef: match.Groups[12].Value));
+            }
+            // Scrathced
+            else if (!string.IsNullOrEmpty(match.Groups[13].Value))
+            {
+                returnObjects.Add(new TextScratched(match.Groups[13].Value));
             }
 
             positionInLine = match.Index + match.Length;
@@ -68,5 +73,15 @@ public class Text
         }
 
         return returnObjects.ToArray();
+    }
+
+    public new string Serialize()
+    {
+        return string.Concat(Content.Select(obj => obj.Serialize()));
+    }
+
+    public override string ToString()
+    {
+        return string.Concat(Content.Select(obj => obj.ToString()));
     }
 }

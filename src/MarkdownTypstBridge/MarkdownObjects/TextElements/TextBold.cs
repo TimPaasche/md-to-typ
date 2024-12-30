@@ -2,12 +2,22 @@ using System.Runtime.CompilerServices;
 
 namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
 
-public class TextBold
+public class TextBold : MarkdownObject
 {
-    public string Content { get; private set; }
+    public MarkdownObject Content { get; private set; }
 
     public TextBold(string content)
     {
-        this.Content = content;
+        this.Content = content.Deserialze();
+    }
+
+    public new string Serialize()
+    {
+        return $"*{Content.Serialize()}*";
+    }
+
+    public override string ToString()
+    {
+        return Content.ToString();
     }
 }
