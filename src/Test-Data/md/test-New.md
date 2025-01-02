@@ -1,12 +1,12 @@
 # Hello World!
 
-Lorem $f(x)=2x+1$ `dolor` ***sit*** ___amet___, **_consetetur_** *__sadipscing__* **elitr**, __sed__ *diam* _nonumy_ [google](https://www.google.de) ~~eirmod~~
+Lorem $f(x)=2x+1$ `dolor` **_sit_** **_amet_**, **_consetetur_** ***sadipscing*** **elitr**, **sed** *diam* *nonumy* [google](https://www.google.de) ~~eirmod~~
 
 enum:
 
 - Bla
-+ Fuu
-* Waaa
+- Fuu
+- Waaa
 
 ## Hello Europe!
 
@@ -21,7 +21,7 @@ some **bold** and some *italic* text
 2. Welt
     1. !WAS
     2. ?
-3.  Oder?
+3. Oder?
 
 ```md
 ### Hello Germnay!
@@ -35,11 +35,10 @@ $$
 f(x) = \frac {sin(x)}{x}
 $$
 
-| Cell 1               |       **Cell** 2 | Cell 3  | Cell 4  |
-|:---------------------|-----------------:|---------|---------|
-| `Cell 5`             |           Cell 6 | Cell 7  | Cell 8  |
-| Cell 9 blalblalblalb | Cell 10 blalblal | Cell 11 | Cell 12 |
+|Cell 1 | Cell   2 |Cell 3 |Cell 4 |
+|:---|---:|:---:|:---:|
+| Cell 5 |Cell 6 |Cell 7 |Cell 8 |
+|Cell 9 blalblalblalb |Cell 10 blalblal |Cell 11 |Cell 12 |
 
-
-> bla
->> bla bla
+>  bla 
+>>  bla bla 

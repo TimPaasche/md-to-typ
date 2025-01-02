@@ -17,7 +17,7 @@ public class TextBoldItalic : MarkdownObject
         return Content.ToString();
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
         return $"**_{Content.Serialize()}_**";
     }

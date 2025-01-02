@@ -11,9 +11,9 @@ public class TextBold : MarkdownObject
         this.Content = content.Deserialze();
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        return $"*{Content.Serialize()}*";
+        return $"**{Content.Serialize()}**";
     }
 
     public override string ToString()

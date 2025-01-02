@@ -14,8 +14,8 @@ public class TextNormal : MarkdownObject
         return Content;
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        throw new System.NotImplementedException();
+        return Content;
     }
 }

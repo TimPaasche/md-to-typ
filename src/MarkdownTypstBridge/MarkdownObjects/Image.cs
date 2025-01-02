@@ -3,22 +3,22 @@ using System.Text.RegularExpressions;
 
 namespace MarkdownTypstBridge.MarkdownObjects;
 
-public class HyperRef : MarkdownObject
+public class Image : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"\[(.*?)\]\((.+?)\)";
+    private const string REGEX_PATTERN = @"!\[(.*?)\]\((.+?)\)";
 
     public MarkdownObject Alias { get; private set; }
     public string Link { get; private set; }
     public bool Inline { get; private set; }
 
-    public HyperRef(string alias, string hyperRef, bool inline = false)
+    public Image(string alias, string hyperRef, bool inline = false)
     {
         this.Alias = alias.Deserialze();
         this.Link = hyperRef;
         this.Inline = inline;
     }
 
-    public HyperRef(string line, bool inline = false)
+    public Image(string line, bool inline = false)
     {
         Match match = Regex.Match(line, REGEX_PATTERN);
 
@@ -34,7 +34,7 @@ public class HyperRef : MarkdownObject
 
     public override string Serialize()
     {
-        string hyperRef = $"[{Alias.Serialize()}]({Link})";
+        string hyperRef = $"![{Alias.Serialize()}]({Link})";
         if (Inline == false)
         {
             hyperRef += Environment.NewLine;

@@ -19,7 +19,7 @@ public class Table : MarkdownObject
     /// <summary>
     /// call like: example[row, cell] = value
     /// </summary>
-    public Text[,] Cells { get; private set; }
+    public Text[] Cells { get; private set; }
 
     /// <summary>
     /// Enum for assigning an allignment to column 
@@ -43,16 +43,11 @@ public class Table : MarkdownObject
         matchCells.RemoveRange(Width, Width);
         this.Count = matchCells.Count;
         this.Height = this.Count / this.Width;
-        this.Cells = new Text[Width, Height];
+        this.Cells = new Text[Count];
 
-        int ii = 0;
-        for (int hCounter = 0; hCounter < this.Height; hCounter++)
+        for (int ii = 0; ii < this.Count; ii++)
         {
-            for (int wCounter = 0; wCounter < this.Width; wCounter++)
-            {
-                this.Cells[wCounter, hCounter] = new Text(matchCells[ii].Value.Trim());
-                ii++;
-            }
+            this.Cells[ii] = new Text(matchCells[ii].Value.Trim(), false);
         }
     }
 
@@ -83,25 +78,23 @@ public class Table : MarkdownObject
         }
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        var table = new StringBuilder();
-
-        // Build the table row by row
-        for (int row = 0; row < Height; row++)
+        var table = string.Empty;
+        for (int ii = 0; ii < Count; ii++)
         {
-            // Add the row cells
-            table.Append("|");
-            for (int column = 0; column < Width; column++)
+            table += "|" + Cells[ii];
+            if ((ii + 1) % Width == 0)
             {
-                table.Append(Cells[row, column] + "|");
+                table += ii != Count - 1
+                    ? "|" + Environment.NewLine
+                    : "|";
             }
-            table.AppendLine();
 
             // Add alignment row after the first row
-            if (row == 0)
+            if (ii == Width - 1)
             {
-                table.Append("|");
+                table += "|";
                 for (int column = 0; column < Width; column++)
                 {
                     string alignment = Alignments[column] switch
@@ -111,13 +104,13 @@ public class Table : MarkdownObject
                         TableCellAlignment.Right => "---:",
                         _ => "---",
                     };
-                    table.Append(alignment + "|");
+                    table += alignment + "|";
                 }
-                table.AppendLine();
+                table += Environment.NewLine;
             }
         }
 
-        return table.ToString();
+        return table;
     }
 }
 

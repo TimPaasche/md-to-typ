@@ -17,8 +17,8 @@ public class CodeBlock : MarkdownObject
         Code = match.Groups[2].Value;
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        return $"```{Language}{Environment.NewLine}{Code}```{Environment.NewLine}";
+        return $"```{Language}{Environment.NewLine}{Code}{Environment.NewLine}```{Environment.NewLine}";
     }
 }

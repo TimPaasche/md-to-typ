@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
+using MarkdownTypstBridge.MarkdownObjects;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownTypstBridge;
 
 public class MarkdownObject
 {
-    public string Serialize() => null;
+    public virtual string Serialize() => null;
 }
 
 internal static class MarkdownObjectExtension
 {
-    internal static MarkdownObject Deserialze(this string line)
+    internal static MarkdownObject Deserialze(this string line, bool newLine = false)
     {
         // Empty Line
         if (string.IsNullOrEmpty(line))
@@ -52,15 +53,15 @@ internal static class MarkdownObjectExtension
         }
 
         // Quote
-        if (false)
+        if (line.TrimStart().StartsWith(">"))
         {
-            throw new NotImplementedException();
+            return new Quote(line);
         }
 
         // Math Block
-        if (false)
+        if (line.TrimStart().StartsWith("$$"))
         {
-            throw new NotImplementedException();
+            return new MathBlock(line);
         }
 
         // Code Block
@@ -69,6 +70,17 @@ internal static class MarkdownObjectExtension
             return new CodeBlock(line);
         }
 
-        return new Text(line);
+        //Link
+        if (line.TrimStart().StartsWith("["))
+        {
+            return new HyperRef(line, false);
+        }
+
+        if (line.TrimStart().StartsWith("!["))
+        {
+            return new Image(line, false);
+        }
+
+        return new Text(line, newLine);
     }
 }

@@ -9,18 +9,16 @@ public class Headline : MarkdownObject
 
     public string Content { get; private set; }
     public int Level { get; private set; }
-    public string Label { get; private set; }
 
     public Headline(string line) : base()
     {
         var match = Regex.Match(line, REGEX_PATTERN);
         Level = match.Groups[1].Value.Length;
         Content = match.Groups[2].Value;
-        Label = match.Groups[2].Value.Replace(" ", "-").ToLower();
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        return $"{new string('#', Level)} {Environment.NewLine}";
+        return $"{new string('#', Level)} {Content}{Environment.NewLine}";
     }
 }

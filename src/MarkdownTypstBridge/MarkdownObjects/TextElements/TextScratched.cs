@@ -16,8 +16,8 @@ public class TextScratched : MarkdownObject
         return Content;
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        throw new NotImplementedException();
+        return $"~~{Content}~~";
     }
 }

@@ -14,7 +14,7 @@ public class TextInlineCode : MarkdownObject
         return Content;
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
         return $"`{Content}`";
     }

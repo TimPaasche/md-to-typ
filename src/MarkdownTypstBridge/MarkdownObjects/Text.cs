@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MarkdownTypstBridge.MarkdownObjects.TextElements;
@@ -9,15 +10,16 @@ namespace MarkdownTypstBridge.MarkdownObjects;
 
 public class Text : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~";
+    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)";
     public MarkdownObject[] Content { get; private set; }
 
-    public Text(string line)
+
+    public Text(string line, bool newline)
     {
-        Content = DestructLineIntoTextElements(line);
+        Content = DestructLineIntoTextElements(line, newline);
     }
 
-    private MarkdownObject[] DestructLineIntoTextElements(string line)
+    private MarkdownObject[] DestructLineIntoTextElements(string line, bool newline)
     {
         var matches = Regex.Matches(line, REGEX_PATTERN);
         int positionInLine = 0;
@@ -56,32 +58,39 @@ public class Text : MarkdownObject
             // HyperRef
             else if (!string.IsNullOrEmpty(match.Groups[12].Value))
             {
-                returnObjects.Add(new HyperRef(alias: match.Groups[11].Value, hyperRef: match.Groups[12].Value));
+                returnObjects.Add(new HyperRef(alias: match.Groups[11].Value, hyperRef: match.Groups[12].Value, true));
             }
             // Scrathced
             else if (!string.IsNullOrEmpty(match.Groups[13].Value))
             {
                 returnObjects.Add(new TextScratched(match.Groups[13].Value));
             }
+            // Image
+            else if (!string.IsNullOrEmpty(match.Groups[15].Value))
+            {
+                returnObjects.Add(new HyperRef(alias: match.Groups[14].Value, hyperRef: match.Groups[15].Value, true));
+            }
 
             positionInLine = match.Index + match.Length;
         }
-
-        if (positionInLine < line.Length - 1)
+        if (positionInLine < line.Length)
         {
             returnObjects.Add(new TextNormal(line.Substring(positionInLine)));
         }
-
+        if (newline)
+        {
+            returnObjects.Add(new EmptyLine());
+        }
         return returnObjects.ToArray();
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        return string.Concat(Content.Select(obj => obj.Serialize()));
+        return string.Concat(Content.Select(obj => { return obj.Serialize(); }));
     }
 
     public override string ToString()
     {
-        return string.Concat(Content.Select(obj => obj.ToString()));
+        return string.Concat(Content.Select(obj => { return obj.ToString() + " "; }));
     }
 }

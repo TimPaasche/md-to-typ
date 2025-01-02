@@ -20,9 +20,4 @@ public static class MarkdownExtensions
         string[] lines = File.ReadAllLines(path);
         return new Markdown(title, lines);
     }
-
-    public static void Serialize(this Markdown markdown, string path)
-    {
-        throw new NotImplementedException();
-    }
 }

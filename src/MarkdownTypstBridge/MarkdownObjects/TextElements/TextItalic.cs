@@ -2,20 +2,20 @@ namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
 
 public class TextItalic : MarkdownObject
 {
-    public string Content { get; private set; }
+    public MarkdownObject Content { get; private set; }
 
     public TextItalic(string content)
     {
-        this.Content = content;
+        this.Content = content.Deserialze();
     }
 
     public override string ToString()
     {
-        return Content;
+        return Content.ToString();
     }
 
-    public new string Serialize()
+    public override string Serialize()
     {
-        throw new System.NotImplementedException();
+        return $"*{Content.Serialize()}*";
     }
 }
