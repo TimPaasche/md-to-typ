@@ -70,12 +70,13 @@ internal static class MarkdownObjectExtension
             return new CodeBlock(line);
         }
 
-        //Link
+        // Link
         if (line.TrimStart().StartsWith("["))
         {
             return new HyperRef(line, false);
         }
-
+        
+        // Image
         if (line.TrimStart().StartsWith("!["))
         {
             return new Image(line, false);

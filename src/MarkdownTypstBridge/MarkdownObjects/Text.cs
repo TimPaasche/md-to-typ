@@ -10,7 +10,7 @@ namespace MarkdownTypstBridge.MarkdownObjects;
 
 public class Text : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)";
+    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)|:(.+?):";
     public MarkdownObject[] Content { get; private set; }
 
 
@@ -69,6 +69,11 @@ public class Text : MarkdownObject
             else if (!string.IsNullOrEmpty(match.Groups[15].Value))
             {
                 returnObjects.Add(new HyperRef(alias: match.Groups[14].Value, hyperRef: match.Groups[15].Value, true));
+            }
+            // Emoji
+            else if (!string.IsNullOrEmpty(match.Groups[16].Value))
+            {
+                returnObjects.Add(new TextEmoji(match.Groups[16].Value));
             }
 
             positionInLine = match.Index + match.Length;
