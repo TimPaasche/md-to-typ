@@ -6,6 +6,7 @@ namespace MarkdownTypstBridge;
 
 public class MarkdownObject
 {
+    public virtual string ToTypst() => null;
     public virtual string Serialize() => null;
 }
 

@@ -26,4 +26,15 @@ public class Quote : MarkdownObject
     {
         return $"{new string('>', NestedDepth)} {Content}{Environment.NewLine}";
     }
+    
+    public override string ToTypst()
+    {
+        string quote = Content.ToTypst();
+        for (int i = 0; i < NestedDepth; i++)
+        {
+            quote += $"#block({Environment.NewLine}  {quote}{Environment.NewLine})";
+        }
+        quote += Environment.NewLine;
+        return quote;
+    }
 }

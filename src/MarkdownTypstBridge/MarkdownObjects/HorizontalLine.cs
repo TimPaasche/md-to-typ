@@ -10,4 +10,9 @@ public class HorizontalLine : MarkdownObject
     {
         return $"---{Environment.NewLine}";
     }
+    
+    public override string ToTypst()
+    {
+        return $"#line(length: 100%){Environment.NewLine}";
+    }
 }

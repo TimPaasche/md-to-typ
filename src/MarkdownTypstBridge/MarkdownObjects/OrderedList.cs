@@ -18,9 +18,19 @@ public class OrderedList : MarkdownObject
         Number = int.Parse(match.Groups[2].Value);
         Content = match.Groups[3].Value.Deserialze();
     }
+    
+    public override string ToString()
+    {
+        return Content.ToString();
+    }
 
     public override string Serialize()
     {
         return $"{new string(' ', Indent)}{Number}. {Content.Serialize()}{Environment.NewLine}";
+    }
+
+    public override string ToTypst()
+    {
+        return $"{new string(' ', Indent)}+ {Content.ToTypst()}{Environment.NewLine}";
     }
 }

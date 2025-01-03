@@ -88,14 +88,19 @@ public class Text : MarkdownObject
         }
         return returnObjects.ToArray();
     }
+    
+    public override string ToString()
+    {
+        return string.Concat(Content.Select(obj => { return obj.ToString() + " "; }));
+    }
 
     public override string Serialize()
     {
         return string.Concat(Content.Select(obj => { return obj.Serialize(); }));
     }
 
-    public override string ToString()
+    public override string ToTypst()
     {
-        return string.Concat(Content.Select(obj => { return obj.ToString() + " "; }));
+        return string.Concat(Content.Select(obj => { return obj.ToTypst(); }));
     }
 }

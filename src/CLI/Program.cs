@@ -1,7 +1,6 @@
 ﻿namespace CLI;
 
 using MarkdownTypstBridge;
-using MarkdownTypstBridge.MarkdownObjects.TextElements;
 
 internal class Program
 {

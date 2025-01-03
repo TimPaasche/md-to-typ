@@ -16,9 +16,19 @@ public class UnorderedList : MarkdownObject
         Indent = match.Groups[1].Value.Length;
         Content = match.Groups[2].Value.Deserialze();
     }
+    
+    public override string ToString()
+    {
+        return Content.ToString();
+    }
 
     public override string Serialize()
     {
         return $"{new string(' ', Indent)}- {Content.Serialize()}{Environment.NewLine}";
+    }
+    
+    public override string ToTypst()
+    {
+        return $"{new string(' ', Indent)}- {Content.ToTypst()}{Environment.NewLine}";
     }
 }
