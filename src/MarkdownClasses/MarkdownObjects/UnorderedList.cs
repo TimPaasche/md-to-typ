@@ -26,9 +26,4 @@ public class UnorderedList : MarkdownObject
     {
         return $"{new string(' ', Indent)}- {Content.Serialize()}{Environment.NewLine}";
     }
-    
-    public override string ToTypst()
-    {
-        return $"{new string(' ', Indent)}- {Content.ToTypst()}{Environment.NewLine}";
-    }
 }

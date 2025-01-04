@@ -10,9 +10,4 @@ public class EmptyLine : MarkdownObject
     {
         return $"{Environment.NewLine}";
     }
-
-    public override string ToTypst()
-    {
-        return Environment.NewLine;
-    }
 }

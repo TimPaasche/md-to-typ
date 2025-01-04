@@ -18,9 +18,4 @@ public class TextNormal : MarkdownObject
     {
         return Content;
     }
-    
-    public override string ToTypst()
-    {
-        return Content;
-    }
 }

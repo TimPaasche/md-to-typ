@@ -20,9 +20,4 @@ public class MathBlock : MarkdownObject
     {
         return $"$${Environment.NewLine}{Content}{Environment.NewLine}$${Environment.NewLine}";
     }
-
-    public override string ToTypst()
-    {
-        return "```Latex" + Environment.NewLine + Content + Environment.NewLine + "```" + Environment.NewLine;
-    }
 }

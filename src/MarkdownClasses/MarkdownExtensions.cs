@@ -5,11 +5,6 @@ namespace MarkdownClasses;
 
 public static class MarkdownExtensions
 {
-    public static string ToTypst(this Markdown markdown)
-    {
-        throw new NotImplementedException();
-    }
-
     public static Markdown Deserialize(string path, string title = null)
     {
         if (string.IsNullOrEmpty(title))

@@ -98,9 +98,4 @@ public class Text : MarkdownObject
     {
         return string.Concat(Content.Select(obj => { return obj.Serialize(); }));
     }
-
-    public override string ToTypst()
-    {
-        return string.Concat(Content.Select(obj => { return obj.ToTypst(); }));
-    }
 }

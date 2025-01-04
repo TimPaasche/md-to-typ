@@ -18,9 +18,4 @@ public class TextItalic : MarkdownObject
     {
         return $"*{Content.Serialize()}*";
     }
-    
-    public override string ToTypst()
-    {
-        return $"_{Content.ToTypst()}_";
-    }
 }

@@ -21,9 +21,4 @@ public class TextBoldItalic : MarkdownObject
     {
         return $"**_{Content.Serialize()}_**";
     }
-    
-    public override string ToTypst()
-    {
-        return $"_*{Content.ToTypst()}*_";
-    }
 }

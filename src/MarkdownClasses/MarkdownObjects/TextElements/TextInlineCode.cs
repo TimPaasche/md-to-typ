@@ -18,9 +18,4 @@ public class TextInlineCode : MarkdownObject
     {
         return $"`{Content}`";
     }
-    
-    public override string ToTypst()
-    {
-        return $"`{Content}`";
-    }
 }

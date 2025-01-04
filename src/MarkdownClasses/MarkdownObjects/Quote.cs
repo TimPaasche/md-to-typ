@@ -27,10 +27,4 @@ public class Quote : MarkdownObject
     {
         return $"{new string('>', NestedDepth)} {Content}{Environment.NewLine}";
     }
-    
-    public override string ToTypst()
-    {
-        return Enumerable.Range(0, NestedDepth)
-            .Aggregate(Content.ToTypst().Trim(), (quote, _) => $"#block([{quote}])") + Environment.NewLine;
-    }
 }

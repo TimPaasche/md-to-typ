@@ -21,9 +21,4 @@ public class CodeBlock : MarkdownObject
     {
         return $"```{Language}{Environment.NewLine}{Code}{Environment.NewLine}```{Environment.NewLine}";
     }
-    
-    public override string ToTypst()
-    {
-        return "```" + Language + Environment.NewLine + Code + Environment.NewLine + "```" + Environment.NewLine;
-    }
 }

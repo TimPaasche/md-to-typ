@@ -20,9 +20,4 @@ public class TextBold : MarkdownObject
     {
         return Content.ToString();
     }
-    
-    public override string ToTypst()
-    {
-        return $"*{Content.ToTypst()}*";
-    }
 }

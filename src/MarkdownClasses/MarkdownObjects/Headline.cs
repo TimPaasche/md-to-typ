@@ -21,9 +21,4 @@ public class Headline : MarkdownObject
     {
         return $"{new string('#', Level)} {Content}{Environment.NewLine}";
     }
-    
-    public override string ToTypst()
-    {
-        return $"{new string('=', Level)} {Content}{Environment.NewLine}";
-    }
 }

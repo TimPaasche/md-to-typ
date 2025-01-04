@@ -20,9 +20,4 @@ public class TextStrikethrough : MarkdownObject
     {
         return $"~~{Content.Serialize()}~~";
     }
-
-    public override string ToTypst()
-    {
-        return $"#strike[{Content.ToTypst()}]";
-    }
 }

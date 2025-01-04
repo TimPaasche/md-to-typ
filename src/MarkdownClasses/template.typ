@@ -35,11 +35,12 @@ indent: auto,
     )
 }
 
+// Define Table Style
 #set table(
   stroke: none,
   gutter: 0.2em,
   fill: (x, y) =>
-    if x == 0 { gray } else { silver },
+    if y == 0 { gray } else { silver },
   inset: (right: 1.5em),
 )
 

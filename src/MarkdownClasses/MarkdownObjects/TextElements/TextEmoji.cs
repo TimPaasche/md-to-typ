@@ -34,9 +34,4 @@ public class TextEmoji : MarkdownObject
     {
         return $":{EmojiMarkdownString}:";
     }
-    
-    public override string ToTypst()
-    {
-        return $"\\u{EmojiUnichar:X}";
-    }
 }

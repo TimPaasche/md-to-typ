@@ -41,9 +41,4 @@ public class Image : MarkdownObject
         }
         return hyperRef;
     }
-    
-    public override string ToTypst()
-    {
-        return $"#figure(image(alt: {Alias.ToTypst()},\"{Link}\"), caption: [{Alias.ToTypst()}]){Environment.NewLine}";
-    }
 }

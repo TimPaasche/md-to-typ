@@ -41,9 +41,4 @@ public class HyperRef : MarkdownObject
         }
         return hyperRef;
     }
-    
-    public override string ToTypst()
-    {
-        return $"#link(\"{Link}\")[{Alias.ToTypst()}]{Environment.NewLine}";
-    }
 }

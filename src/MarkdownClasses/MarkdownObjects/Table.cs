@@ -112,27 +112,6 @@ public class Table : MarkdownObject
 
         return table;
     }
-
-    public override string ToTypst()
-    {
-        string table = "#table(" + Environment.NewLine;
-        table += $"  columns: {Width}," + Environment.NewLine;
-        table += $"  align: ({string.Join(",", this.Alignments.Select(alignment => alignment switch
-                                {
-                                    TableCellAlignment.Left => "left",
-                                    TableCellAlignment.Center => "center",
-                                    TableCellAlignment.Right => "right",
-                                    _ => throw new ArgumentOutOfRangeException(nameof(alignment), alignment, "Invalid alignment value")
-                                }))})," + Environment.NewLine;
-
-        foreach (var cell in this.Cells)
-        {
-            table += $"  [{cell.ToTypst()}]," + Environment.NewLine;
-        }
-        
-        table += $"){Environment.NewLine}";
-        return table;
-    }
 }
 
 public enum TableCellAlignment

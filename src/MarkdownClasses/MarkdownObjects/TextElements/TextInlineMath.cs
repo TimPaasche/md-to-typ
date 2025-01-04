@@ -18,9 +18,4 @@ public class TextInlineMath : MarkdownObject
     {
         return $"${Content}$";
     }
-    
-    public override string ToTypst()
-    {
-        return $"${Content.Trim(' ')}$";
-    }
 }
