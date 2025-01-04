@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MdToTyp\MdToTyp.csproj" />
     <ProjectReference Include="..\MarkdownClasses\MarkdownClasses.csproj" />
     <ProjectReference Include="..\MdToTyp\MdToTyp.csproj" />
   </ItemGroup>
