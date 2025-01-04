@@ -1,7 +1,8 @@
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class Quote : MarkdownObject
 {
@@ -29,12 +30,7 @@ public class Quote : MarkdownObject
     
     public override string ToTypst()
     {
-        string quote = Content.ToTypst();
-        for (int i = 0; i < NestedDepth; i++)
-        {
-            quote += $"#block({Environment.NewLine}  {quote}{Environment.NewLine})";
-        }
-        quote += Environment.NewLine;
-        return quote;
+        return Enumerable.Range(0, NestedDepth)
+            .Aggregate(Content.ToTypst().Trim(), (quote, _) => $"#block([{quote}])") + Environment.NewLine;
     }
 }

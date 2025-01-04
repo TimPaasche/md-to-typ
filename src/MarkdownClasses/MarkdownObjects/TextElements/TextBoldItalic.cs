@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextBoldItalic : MarkdownObject
 {
@@ -20,5 +20,10 @@ public class TextBoldItalic : MarkdownObject
     public override string Serialize()
     {
         return $"**_{Content.Serialize()}_**";
+    }
+    
+    public override string ToTypst()
+    {
+        return $"_*{Content.ToTypst()}*_";
     }
 }

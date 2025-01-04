@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text.RegularExpressions;
-using MarkdownTypstBridge.MarkdownObjects.TextElements;
+using MarkdownClasses.MarkdownObjects.TextElements;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class Text : MarkdownObject
 {
@@ -63,7 +63,7 @@ public class Text : MarkdownObject
             // Scrathced
             else if (!string.IsNullOrEmpty(match.Groups[13].Value))
             {
-                returnObjects.Add(new TextScratched(match.Groups[13].Value));
+                returnObjects.Add(new TextStrikethrough(match.Groups[13].Value));
             }
             // Image
             else if (!string.IsNullOrEmpty(match.Groups[15].Value))

@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class Table : MarkdownObject
 {
@@ -117,7 +117,7 @@ public class Table : MarkdownObject
     {
         string table = "#table(" + Environment.NewLine;
         table += $"  columns: {Width}," + Environment.NewLine;
-        table += $"  align: ({string.Join("", this.Alignments.Select(alignment => alignment switch
+        table += $"  align: ({string.Join(",", this.Alignments.Select(alignment => alignment switch
                                 {
                                     TableCellAlignment.Left => "left",
                                     TableCellAlignment.Center => "center",
@@ -127,7 +127,7 @@ public class Table : MarkdownObject
 
         foreach (var cell in this.Cells)
         {
-            table += $"  {cell.ToTypst()}," + Environment.NewLine;
+            table += $"  [{cell.ToTypst()}]," + Environment.NewLine;
         }
         
         table += $"){Environment.NewLine}";

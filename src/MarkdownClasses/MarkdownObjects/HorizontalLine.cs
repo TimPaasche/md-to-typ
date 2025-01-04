@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class HorizontalLine : MarkdownObject
 {

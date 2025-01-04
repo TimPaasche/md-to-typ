@@ -1,4 +1,4 @@
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextItalic : MarkdownObject
 {
@@ -17,5 +17,10 @@ public class TextItalic : MarkdownObject
     public override string Serialize()
     {
         return $"*{Content.Serialize()}*";
+    }
+    
+    public override string ToTypst()
+    {
+        return $"_{Content.ToTypst()}_";
     }
 }

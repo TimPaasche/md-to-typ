@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class Headline : MarkdownObject
 {
@@ -24,6 +24,6 @@ public class Headline : MarkdownObject
     
     public override string ToTypst()
     {
-        return $"{new string('=', Level)}) {Content} {Content.ToLower().Replace(' ', '-')}{Environment.NewLine}";
+        return $"{new string('=', Level)} {Content}{Environment.NewLine}";
     }
 }

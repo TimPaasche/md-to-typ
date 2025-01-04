@@ -1,4 +1,4 @@
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextInlineCode : MarkdownObject
 {
@@ -15,6 +15,11 @@ public class TextInlineCode : MarkdownObject
     }
 
     public override string Serialize()
+    {
+        return $"`{Content}`";
+    }
+    
+    public override string ToTypst()
     {
         return $"`{Content}`";
     }

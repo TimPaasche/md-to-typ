@@ -1,4 +1,4 @@
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextNormal : MarkdownObject
 {
@@ -15,6 +15,11 @@ public class TextNormal : MarkdownObject
     }
 
     public override string Serialize()
+    {
+        return Content;
+    }
+    
+    public override string ToTypst()
     {
         return Content;
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class HyperRef : MarkdownObject
 {
@@ -44,6 +44,6 @@ public class HyperRef : MarkdownObject
     
     public override string ToTypst()
     {
-        return $"#link({Link})[{Environment.NewLine}  {Alias.ToTypst()}{Environment.NewLine}]{Environment.NewLine})";
+        return $"#link(\"{Link}\")[{Alias.ToTypst()}]{Environment.NewLine}";
     }
 }

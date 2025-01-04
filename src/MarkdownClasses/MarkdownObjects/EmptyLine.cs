@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class EmptyLine : MarkdownObject
 {
@@ -13,6 +13,6 @@ public class EmptyLine : MarkdownObject
 
     public override string ToTypst()
     {
-        return "#linebreak()";
+        return Environment.NewLine;
     }
 }

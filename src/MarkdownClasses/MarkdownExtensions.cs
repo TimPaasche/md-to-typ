@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace MarkdownTypstBridge;
+namespace MarkdownClasses;
 
 public static class MarkdownExtensions
 {

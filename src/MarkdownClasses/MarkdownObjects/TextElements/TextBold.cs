@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextBold : MarkdownObject
 {
@@ -19,5 +19,10 @@ public class TextBold : MarkdownObject
     public override string ToString()
     {
         return Content.ToString();
+    }
+    
+    public override string ToTypst()
+    {
+        return $"*{Content.ToTypst()}*";
     }
 }

@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using MarkdownTypstBridge.MarkdownObjects;
+using MarkdownClasses.MarkdownObjects;
 
-namespace MarkdownTypstBridge;
+namespace MarkdownClasses;
 
 public class Markdown
 {
@@ -36,7 +37,7 @@ public class Markdown
         }
         return md.ToString();
     }
-
+    
     public void Deserialize(IEnumerable<string> lines, string title)
     {
         this.Title = title;

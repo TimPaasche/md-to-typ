@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\MarkdownTypstBridge\MarkdownTypstBridge.csproj" />
+    <ProjectReference Include="..\MarkdownClasses\MarkdownClasses.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

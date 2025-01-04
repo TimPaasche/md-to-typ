@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using MarkdownTypstBridge.MarkdownObjects;
+using MarkdownClasses.MarkdownObjects;
 
-namespace MarkdownTypstBridge;
+namespace MarkdownClasses;
 
 public class MarkdownObject
 {

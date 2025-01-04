@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace MarkdownTypstBridge.MarkdownObjects.TextElements;
+namespace MarkdownClasses.MarkdownObjects.TextElements;
 
 public class TextEmoji : MarkdownObject
 {
@@ -33,5 +33,10 @@ public class TextEmoji : MarkdownObject
     public override string Serialize()
     {
         return $":{EmojiMarkdownString}:";
+    }
+    
+    public override string ToTypst()
+    {
+        return $"\\u{EmojiUnichar:X}";
     }
 }

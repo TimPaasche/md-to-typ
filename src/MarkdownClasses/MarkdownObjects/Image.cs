@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace MarkdownTypstBridge.MarkdownObjects;
+namespace MarkdownClasses.MarkdownObjects;
 
 public class Image : MarkdownObject
 {
@@ -44,13 +44,6 @@ public class Image : MarkdownObject
     
     public override string ToTypst()
     {
-        string figure = "#figure(" + Environment.NewLine;
-        figure += $"  image({Environment.NewLine}";
-        figure += $"    alt: {Alias.ToTypst()}{Environment.NewLine},";
-        figure += $"    {Link}{Environment.NewLine}";
-        figure += $"  ),{Environment.NewLine}";
-        figure += $"  caption: [{Alias.ToTypst()}]{Environment.NewLine}";
-        figure += $"){Environment.NewLine}";
-        return $"#image({Alias.ToTypst()}{Environment.NewLine}  {Link}{Environment.NewLine})";
+        return $"#figure(image(alt: {Alias.ToTypst()},\"{Link}\"), caption: [{Alias.ToTypst()}]){Environment.NewLine}";
     }
 }
