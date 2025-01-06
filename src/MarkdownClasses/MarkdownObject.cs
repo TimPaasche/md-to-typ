@@ -14,7 +14,7 @@ internal static class MarkdownObjectExtension
     internal static MarkdownObject Deserialze(this string line, bool newLine = false)
     {
         // Empty Line
-        if (string.IsNullOrEmpty(line))
+        if (string.IsNullOrEmpty(line.Trim()))
         {
             return new EmptyLine();
         }

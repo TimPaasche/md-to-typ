@@ -36,8 +36,8 @@ f(x) = \frac {sin(x)}{x}
 $$
 
 | Cell 1               |       **Cell** 2 | Cell 3  | Cell 4  |
-|:---------------------|-----------------:|---------|---------|
-| `Cell 5`             |           Cell 6 | Cell 7  | Cell 8  |
+|:---------------------|-:|---------|---------|
+| `Cell 5`             |          $x=2y$ | Cell 7  | Cell 8  |
 | Cell 9 blalblalblalb | Cell 10 blalblal | Cell 11 | Cell 12 |
 
 

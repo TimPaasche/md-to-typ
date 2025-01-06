@@ -10,7 +10,7 @@ namespace MarkdownClasses.MarkdownObjects;
 public class Table : MarkdownObject
 {
     private string REGEX_PATTERN = @"(?<=\|).*?(?=\|)";
-    private string REGEX_PATTERN_ALIGNMENT_IDENTIFYER = @"(?<=\|)[-:]*?(?=\|)";
+    private string REGEX_PATTERN_ALIGNMENT_IDENTIFYER = @"(?<=\|)[-: ]*?(?=\|)";
 
     public int Height { get; private set; }
     public int Width { get; private set; }
@@ -59,15 +59,16 @@ public class Table : MarkdownObject
         for (int ii = 0; ii < this.Width; ii++)
         {
             var match = matchesAllignment[ii];
-            if (match.Value.StartsWith(":") && match.Value.EndsWith(":"))
+            var allignemntIdentfier = match.Value.Trim();
+            if (allignemntIdentfier.StartsWith(":") && allignemntIdentfier.EndsWith(":"))
             {
                 Alignments[ii] = TableCellAlignment.Center;
             }
-            else if (match.Value.StartsWith(":"))
+            else if (allignemntIdentfier.StartsWith(":"))
             {
                 Alignments[ii] = TableCellAlignment.Left;
             }
-            else if (match.Value.EndsWith(":"))
+            else if (allignemntIdentfier.EndsWith(":"))
             {
                 Alignments[ii] = TableCellAlignment.Right;
             }

@@ -1,43 +1,36 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
 
-# What is implemented?
-
-- Deserialistion of markdown
-  - Headlines works
-  - Codeblock works
-  - Text works with
-    - InlineCode detection
-    - InlineMath detection
-    - Bold Text
-    - Italic Text
-    - Bold and Italic Text
-  - Ordered Lists
-  - Unordered Lists
-  - Empty Lines
+This repository contains a small tool that converts Markdown (.md) files to Typst documents. Typst is a modern typesetting system that allows for the creation of high-quality PDF documents. This tool facilitates the conversion process, enabling users to easily transform their Markdown content into Typst format, which can then be exported as a PDF.
 
 # What is still missing?
-- Serialisation of Markdown
-- Deserialisation of Markdown
-  - Tables
-  - Images
-  - Horizontal Lines
-  - Quotes
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+- Conversion of the LaTeX code to Typst
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Installation
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+1. Clone the repository to your local machine.
+2. Install Typst ([Install-Guide](https://github.com/typst/typst?tab=readme-ov-file#installation))
+3. Build the project with 
+```
+dotnet build --configuration Release
+```
+4. PATH the `md-export` executable 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Usage
+
+To convert a Markdown file to Typst, run the following command:
+
+```ps
+md-export <input-file> <flags>
+```
+
+|         Flag         | Description                                                                                                                                               |
+|:--------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  `-o` or `--output`  | Specifies the output directory. If not provided, the output file will be the same as the input file, but with a `.typ` or `.pdf` extension.               |
+|  `-t` or `--title`   | Specifies the file name of the export.                                                                                                                    |
+|  `-s` or `--style`   | Specifies the styling template, that should be used for the export.                                                                                       |
+|   `-p` or `--pdf`    | Specifies the output file format. If not provided, the output file will be a `.typ` file. If the flag is provided it will be compiled with typst to pdf.  |
+
+# License
+
+MIT License

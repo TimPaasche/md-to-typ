@@ -6,7 +6,7 @@ public class TextNormal : MarkdownObject
 
     public TextNormal(string content)
     {
-        this.Content = content;
+        this.Content = content.Replace("$", @"\$");
     }
 
     public override string ToString()
