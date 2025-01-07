@@ -174,4 +174,9 @@ public static class Converter
     {
         return textNormal.Content;
     }
+    
+    private static string ConvertTexToTypst(string tex)
+    {
+        throw new NotImplementedException();
+    }
 }

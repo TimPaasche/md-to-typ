@@ -10,4 +10,8 @@
       <ProjectReference Include="..\MarkdownClasses\MarkdownClasses.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="tex-to-typst-DotNet" Version="0.1.0" />
+    </ItemGroup>
+
 </Project>
