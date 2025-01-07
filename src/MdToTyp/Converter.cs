@@ -175,8 +175,8 @@ public static class Converter
         return textNormal.Content;
     }
     
-    private static string ConvertTexToTypst(string tex)
+    public static string ConvertTexToTypst(string tex)
     {
-        throw new NotImplementedException();
+        return TexToTypstDotNet.TexToTypst.Convert(tex);
     }
 }

@@ -9,7 +9,12 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        #if DEBUG
+        string tex = "\\frac{1}{4} \\sum_{i=1}^4 \\mathbf{P}_i^\\top \\sqrt{v} \\mathbf{\\Sigma}^{-1} \\sqrt{v} \\mathbf{P}_i \\mathbf{j} = \\mathbf{D}^\\top v \\phi";
+        var test = MdToTyp.Converter.ConvertTexToTypst(tex);
+        Console.WriteLine(test);
+        return;
+
+#if DEBUG
         args = new string[]
         {
             @"C:\Users\TLP-PC\Desktop\TEST\summory.md",
