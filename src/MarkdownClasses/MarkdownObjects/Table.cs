@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MarkdownClasses.MarkdownObjects;
@@ -19,7 +17,7 @@ public class Table : MarkdownObject
     /// <summary>
     /// call like: example[row, cell] = value
     /// </summary>
-    public Text[] Cells { get; private set; }
+    public MarkdownObject[] Cells { get; private set; }
 
     /// <summary>
     /// Enum for assigning an allignment to column 
@@ -43,7 +41,7 @@ public class Table : MarkdownObject
         matchCells.RemoveRange(Width, Width);
         this.Count = matchCells.Count;
         this.Height = this.Count / this.Width;
-        this.Cells = new Text[Count];
+        this.Cells = new MarkdownObject[Count];
 
         for (int ii = 0; ii < this.Count; ii++)
         {

@@ -2,7 +2,7 @@ using System;
 
 namespace MarkdownClasses.MarkdownObjects;
 
-public class EmptyLine : MarkdownObject
+public class EmptyLine : TextElement
 {
     public EmptyLine() { }
 

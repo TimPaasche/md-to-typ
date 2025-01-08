@@ -1,6 +1,6 @@
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextInlineCode : MarkdownObject
+public class TextInlineCode : TextElement
 {
     public string Content { get; private set; }
 

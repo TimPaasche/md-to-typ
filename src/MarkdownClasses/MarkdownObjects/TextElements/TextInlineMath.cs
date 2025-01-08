@@ -1,6 +1,6 @@
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextInlineMath : MarkdownObject
+public class TextInlineMath : TextElement
 {
     public string Content { get; private set; }
 

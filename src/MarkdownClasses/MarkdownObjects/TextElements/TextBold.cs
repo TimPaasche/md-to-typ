@@ -1,8 +1,6 @@
-using System.Runtime.CompilerServices;
-
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextBold : MarkdownObject
+public class TextBold : TextElement
 {
     public MarkdownObject Content { get; private set; }
 

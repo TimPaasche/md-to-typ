@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
-
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextBoldItalic : MarkdownObject
+public class TextBoldItalic : TextElement
 {
     public MarkdownObject Content { get; private set; }
 

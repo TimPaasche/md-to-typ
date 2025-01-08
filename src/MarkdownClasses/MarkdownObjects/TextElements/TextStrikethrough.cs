@@ -1,8 +1,6 @@
-using System;
-
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextStrikethrough : MarkdownObject
+public class TextStrikethrough : TextElement
 {
     public MarkdownObject Content { get; private set; }
 

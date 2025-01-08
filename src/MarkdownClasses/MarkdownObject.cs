@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
 using MarkdownClasses.MarkdownObjects;
+using System.Linq;
 
 namespace MarkdownClasses;
 
@@ -26,10 +25,16 @@ internal static class MarkdownObjectExtension
 
         }
 
+        // Horitontal Line
+        if (line.TrimStart().StartsWith("---") || line.TrimStart().StartsWith("___"))
+        {
+            return new HorizontalLine();
+        }
+
         // UnorderedList
-        if (line.TrimStart().StartsWith("-")
-            || line.TrimStart().StartsWith("*")
-            || line.TrimStart().StartsWith("+"))
+        if (line.TrimStart().StartsWith("- ")
+            || line.TrimStart().StartsWith("* ")
+            || line.TrimStart().StartsWith("+ "))
         {
             return new UnorderedList(line);
         }
@@ -38,12 +43,6 @@ internal static class MarkdownObjectExtension
         if (char.IsDigit(line.TrimStart().First()))
         {
             return new OrderedList(line);
-        }
-
-        // Horitontal Line
-        if (line.TrimStart().StartsWith("---") || line.TrimStart().StartsWith("___"))
-        {
-            return new HorizontalLine();
         }
 
         // Table
@@ -75,7 +74,7 @@ internal static class MarkdownObjectExtension
         {
             return new HyperRef(line, false);
         }
-        
+
         // Image
         if (line.TrimStart().StartsWith("!["))
         {

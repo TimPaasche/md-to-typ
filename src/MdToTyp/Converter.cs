@@ -1,11 +1,10 @@
-﻿using System;
+﻿using MarkdownClasses;
+using MarkdownClasses.MarkdownObjects;
+using MarkdownClasses.MarkdownObjects.TextElements;
+using System;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using MarkdownClasses;
-using MarkdownClasses.MarkdownObjects;
-using MarkdownClasses.MarkdownObjects.TextElements;
 
 namespace MdToTyp;
 
@@ -20,10 +19,10 @@ public static class Converter
         }
         return typst;
     }
-    
+
     public static string ToTypst(this Markdown md, string pathTemplate)
     {
-        if(File.Exists(pathTemplate) == false)
+        if (File.Exists(pathTemplate) == false)
         {
             throw new FileNotFoundException("Template file not found", pathTemplate);
         }
@@ -31,12 +30,12 @@ public static class Converter
         string template = File.ReadAllText(pathTemplate);
         return template + Environment.NewLine + md.ToTypst();
     }
-    
+
     public static string ToTypst(this MarkdownObject mdObj) =>
         mdObj switch
         {
             CodeBlock codeBlock => codeBlock.ToTypst(),
-            EmptyLine emptyLine=> emptyLine.ToTypst(),
+            EmptyLine emptyLine => emptyLine.ToTypst(),
             Headline headline => headline.ToTypst(),
             HorizontalLine horizontalLine => horizontalLine.ToTypst(),
             HyperRef hyperRef => hyperRef.ToTypst(),
@@ -57,60 +56,61 @@ public static class Converter
             TextNormal textNormal => textNormal.ToTypst(),
             _ => throw new EvaluateException("Unknown MarkdownObject type")
         };
-    
-    
+
+
     private static string ToTypst(this CodeBlock codeBlock)
     {
         return $"```{codeBlock.Language}{Environment.NewLine}{codeBlock.Code}{Environment.NewLine}```{Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this EmptyLine emptyLine)
     {
         return Environment.NewLine;
     }
-    
+
     private static string ToTypst(this Headline headline)
     {
         return $"{new string('=', headline.Level)} {headline.Content}{Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this HorizontalLine horizontalLine)
     {
         return $"#line(length: 100%){Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this HyperRef hyperRef)
     {
-        return $"#link(\"{hyperRef.Link}\")[{hyperRef.Alias.ToTypst()}]{Environment.NewLine}";
+        return $"#link(\"{hyperRef.Url}\")[{hyperRef.Alias.ToTypst()}]{Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this Image image)
     {
-        return $"#figure(image(alt: \"{image.Alias.ToTypst()}\",\"{image.Link}\"), caption: []){Environment.NewLine}";
+        return $"#figure(image(alt: \"{image.Alias.ToTypst()}\",\"{image.ImageRefrence}\"), caption: []){Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this MathBlock mathBlock)
     {
-        return $"```latex{Environment.NewLine}{mathBlock.Content}{Environment.NewLine}```{Environment.NewLine}";
+        return $"$ {ConvertTexToTypst(mathBlock.Content.Trim())} $";
     }
-    
+
     private static string ToTypst(this OrderedList orderedList)
     {
         return $"{new string(' ', orderedList.Indent)}+ {orderedList.Content.ToTypst()}{Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this UnorderedList unorderedList)
     {
         return $"{new string(' ', unorderedList.Indent)}- {unorderedList.Content.ToTypst()}{Environment.NewLine}";
     }
-    
+
     private static string ToTypst(this Quote quote)
     {
-        return Enumerable.Range(0, quote.NestedDepth).Aggregate(quote.Content.ToTypst().Trim(), (q, ii) => $"#block(fill: luma({240 - (ii * 10)}),inset: 4pt,radius: 1pt,width: 90%,[{q}])") + Environment.NewLine;
+        //TODO: Quotes have to be in blocks, but the current implementation is not working pretty
+        return Enumerable.Range(0, quote.NestedDepth).Aggregate(quote.Content.ToTypst().Trim(), (q, ii) => $"#block(fill: luma({240 - (ii * 10)}),inset: 4pt,radius: 1pt,width: 100%,[{q}])") + Environment.NewLine;
     }
-    
+
     private static string ToTypst(this Table table)
-    {        
+    {
         string tableStr = "#figure(caption: [], table(" + Environment.NewLine;
         tableStr += $"  columns: {table.Width}," + Environment.NewLine;
         tableStr += $"  align: ({string.Join(",", table.Alignments.Select(alignment => alignment switch
@@ -125,56 +125,56 @@ public static class Converter
         {
             tableStr += $"  [{cell.ToTypst()}]," + Environment.NewLine;
         }
-        
+
         tableStr += $")){Environment.NewLine}";
         return tableStr;
     }
-    
+
     private static string ToTypst(this Text text)
     {
         return string.Concat(text.Content.Select(obj => obj.ToTypst()));
     }
-    
+
     private static string ToTypst(this TextBold textBold)
     {
         return $"*{textBold.Content.ToTypst()}*";
     }
-    
+
     private static string ToTypst(this TextItalic textItalic)
     {
         return $"_{textItalic.Content.ToTypst()}_";
     }
-    
+
     private static string ToTypst(this TextBoldItalic textBoldItalic)
     {
         return $"_*{textBoldItalic.Content.ToTypst()}*_";
     }
-    
+
     private static string ToTypst(this TextStrikethrough textStrikethrough)
     {
         return $"#strike[{textStrikethrough.Content.ToTypst()}]";
     }
-    
+
     private static string ToTypst(this TextEmoji textEmoji)
     {
-        return $"\\u{textEmoji.EmojiUnichar:X}";
+        return $"\\u{{{textEmoji.EmojiUnichar:X}}}";
     }
-    
+
     private static string ToTypst(this TextInlineCode textInlineCode)
     {
         return $"`{textInlineCode.Content}`";
     }
-    
+
     private static string ToTypst(this TextInlineMath textInlineMath)
     {
-        return $"`${textInlineMath.Content.Trim(' ')}$`";
+        return $"${ConvertTexToTypst(textInlineMath.Content.Trim(' '))}$";
     }
-    
+
     private static string ToTypst(this TextNormal textNormal)
     {
         return textNormal.Content;
     }
-    
+
     public static string ConvertTexToTypst(string tex)
     {
         return TexToTypstDotNet.TexToTypst.Convert(tex);

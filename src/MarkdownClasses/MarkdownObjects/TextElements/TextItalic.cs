@@ -1,6 +1,6 @@
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextItalic : MarkdownObject
+public class TextItalic : TextElement
 {
     public MarkdownObject Content { get; private set; }
 

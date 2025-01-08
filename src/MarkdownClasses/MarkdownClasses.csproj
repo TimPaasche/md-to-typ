@@ -7,12 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Update="md-emojis.csv">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="template.typ">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<None Update="md-emojis.csv">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

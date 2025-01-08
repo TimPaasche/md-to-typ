@@ -1,6 +1,6 @@
 namespace MarkdownClasses.MarkdownObjects.TextElements;
 
-public class TextNormal : MarkdownObject
+public class TextNormal : TextElement
 {
     public string Content { get; private set; }
 
