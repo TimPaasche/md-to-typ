@@ -4,10 +4,10 @@ This repository contains a small tool that converts Markdown (.md) files to Typs
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-  - [Prebuild](##prebuild-floppydisk)
-  - [Build it yourself](##build-it-yourself-hammer)
+  - [Prebuild](##prebuild-)
+  - [Build it yourself](##build-it-yourself-)
 - [Usage](#usage)
-- [What is still missing?](#what-is-still-miising)
+- [What is still missing?](#what-is-still-missing)
 - [License](#license)
 
 # Dependencies
@@ -40,7 +40,7 @@ dotnet build --configuration Release
 To convert a Markdown file to Typst, run the following command:
 
 ```ps
-md-export <input-file> <flags>
+md-export <input> <flags>
 ```
 
 |         Flag         | Description                                                                                                                                               |
