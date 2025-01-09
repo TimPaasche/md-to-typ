@@ -39,7 +39,7 @@ dotnet build --configuration Release
 
 To convert a Markdown file to Typst, run the following command:
 
-```ps
+```
 md-export <input> <flags>
 ```
 
