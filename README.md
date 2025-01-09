@@ -1,3 +1,7 @@
+# md-to-typ
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/TimPaasche/md-to-typ/blob/master/LICENSE.txt)
+
 # Introduction
 
 This repository contains a small tool that converts Markdown (.md) files to Typst documents. Typst is a modern typesetting system that allows for the creation of high-quality PDF documents. This tool facilitates the conversion process, enabling users to easily transform their Markdown content into Typst format, which can then be exported as a PDF.
