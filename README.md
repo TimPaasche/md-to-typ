@@ -52,6 +52,7 @@ md-export <input> <flags>
 
 # What is still missing?
 
+- footnotes support
 - Unit Tests
 - full emoji support
 - better bockquotes
