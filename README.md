@@ -4,8 +4,8 @@ This repository contains a small tool that converts Markdown (.md) files to Typs
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-  - [Prebuild](##prebuild-)
-  - [Build it yourself](##build-it-yourself-)
+  - [Prebuild](#prebuild-floppy_disk)
+  - [Build it yourself](#build-it-yourself-hammer)
 - [Usage](#usage)
 - [What is still missing?](#what-is-still-missing)
 - [License](#license)
