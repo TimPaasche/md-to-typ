@@ -40,7 +40,7 @@ internal static class MarkdownObjectExtension
         }
 
         // Ordered List
-        if (char.IsDigit(line.TrimStart().First()))
+        if (char.IsDigit(line.TrimStart().First()) && (line.TrimStart().Length >= 3))
         {
             return new OrderedList(line);
         }

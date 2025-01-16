@@ -10,17 +10,18 @@ internal class Program
     static void Main(string[] args)
     {
 
-        //#if DEBUG
-        //        args = new string[]
-        //        {
-        //                    @"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
-        //                    "-s",
-        //                    @"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\SEW-template.typ",
-        //                    "-t",
-        //                    "Test 1",
-        //                    "--pdf"
-        //        };
-        //#endif
+#if DEBUG
+        args = new string[]
+        {
+                                    //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
+                                    @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
+                                    "-s",
+                                    @"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\SEW-template.typ",
+                                    "-t",
+                                    "Test 1",
+                                    //"--pdf"
+        };
+#endif
 
         string input = null;
         string output = null;

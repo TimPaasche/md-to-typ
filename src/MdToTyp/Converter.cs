@@ -157,7 +157,12 @@ public static class Converter
 
     private static string ToTypst(this TextEmoji textEmoji)
     {
-        return $"\\u{{{textEmoji.EmojiUnichar:X}}}";
+        string returnStr = string.Empty;
+        foreach (var emoji in textEmoji.EmojiUnichar)
+        {
+            returnStr += $"\\u{{{emoji:X}}}";
+        }
+        return returnStr;
     }
 
     private static string ToTypst(this TextInlineCode textInlineCode)
