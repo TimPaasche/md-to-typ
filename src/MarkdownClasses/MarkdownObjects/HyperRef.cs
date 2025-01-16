@@ -5,7 +5,7 @@ namespace MarkdownClasses.MarkdownObjects;
 
 public class HyperRef : TextElement
 {
-    private const string REGEX_PATTERN = @"\[(.*?)\]\((.+?)\)";
+    private const string REGEX_PATTERN = @"^\[(.*)\]\((.+)\)$";
 
     public MarkdownObject Alias { get; private set; }
     public string Url { get; private set; }
@@ -20,7 +20,7 @@ public class HyperRef : TextElement
 
     public HyperRef(string line, bool inline = false)
     {
-        Match match = Regex.Match(line, REGEX_PATTERN);
+        Match match = Regex.Match(line, REGEX_PATTERN, RegexOptions.Multiline);
 
         this.Alias = match.Groups[1].Value.Deserialze();
         this.Url = match.Groups[2].Value;

@@ -13,13 +13,10 @@ internal class Program
 #if DEBUG
         args = new string[]
         {
-                                    //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
-                                    @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
-                                    "-s",
-                                    @"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\SEW-template.typ",
-                                    "-t",
-                                    "Test 1",
-                                    //"--pdf"
+            //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
+            // @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
+            @"C:\Repository\md-to-typ\src\Test-Data\md\test.md",    
+            "--pdf"
         };
 #endif
 

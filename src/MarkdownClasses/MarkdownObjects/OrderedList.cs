@@ -5,7 +5,7 @@ namespace MarkdownClasses.MarkdownObjects;
 
 public class OrderedList : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"( *)(\d+). *(.*)";
+    private const string REGEX_PATTERN = @"( *)(\d+)\. *(.*)";
 
     public int Indent { get; private set; }
     public int Number { get; private set; }
