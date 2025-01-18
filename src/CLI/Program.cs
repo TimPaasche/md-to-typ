@@ -176,12 +176,12 @@ internal class Program
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = $"cmd.exe", // Use "bash" for Linux/Mac
-                Arguments = $"/c {command}", // /c tells cmd to execute the command and exit
-                RedirectStandardOutput = true, // Redirect the output
-                RedirectStandardError = true,  // Redirect the error output
-                UseShellExecute = false,      // Required for redirection
-                CreateNoWindow = true         // Don't create a terminal window
+                FileName = $"cmd.exe",           // Use "bash" for Linux/Mac
+                Arguments = $"/c {command}",     // /c tells cmd to execute the command and exit
+                RedirectStandardOutput = true,   // Redirect the output
+                RedirectStandardError = true,    // Redirect the error output
+                UseShellExecute = false,         // Required for redirection
+                CreateNoWindow = true            // Don't create a terminal window
             }
         };
 

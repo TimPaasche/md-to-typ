@@ -4,6 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
+		<RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -11,16 +12,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Update="C:\Users\TLP-PC\.nuget\packages\tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\package.json">
+		<Content Update="$(NuGetPackageRoot)tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\package.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="C:\Users\TLP-PC\.nuget\packages\tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\package-lock.json">
+		<Content Update="$(NuGetPackageRoot)tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\package-lock.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="C:\Users\TLP-PC\.nuget\packages\tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\node_modules\**\*">
+		<Content Update="$(NuGetPackageRoot)tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\node_modules\**\*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Update="C:\Users\TLP-PC\.nuget\packages\tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\convert.js">
+		<Content Update="$(NuGetPackageRoot)tex.to.typst.dotnet\0.1.2\contentFiles\any\netstandard2.0\convert.js">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
