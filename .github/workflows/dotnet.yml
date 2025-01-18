@@ -21,11 +21,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish --no-build --configuration Release --self-contained true
+      run: dotnet publish --no-build --configuration Release --output ./publish --runtime win-x64 --self-contained true
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3
       with:
