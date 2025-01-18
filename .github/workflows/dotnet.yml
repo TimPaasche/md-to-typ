@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: Add private NuGet source
+      run: dotnet nuget add source --username <your-username> --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text --name private-repo <private-repo-url>
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
