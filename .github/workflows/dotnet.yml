@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Add private NuGet source
-      run: dotnet nuget add source --username <your-username> --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text --name private-repo <private-repo-url>
+      run: dotnet nuget add source --username TimPaasche --password ${{ secrets.TEXTOTYPSTDOTNETNUGET }} --store-password-in-clear-text --name private-repo tex-to-typst-DotNet
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
