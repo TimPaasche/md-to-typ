@@ -16,8 +16,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Add NuGet source
-      run: dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json-
     - name: Add GitHub public NuGet source
       run: dotnet nuget add source --name github --username TimPaasche --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text https://nuget.pkg.github.com/TimPaasche/index.jso
     - name: Restore dependencies
