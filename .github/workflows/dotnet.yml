@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Add GitHub public NuGet source
-      run: dotnet nuget add source --name github --username TimPaasche --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text https://nuget.pkg.github.com/TimPaasche/index.jso
+      run: dotnet nuget add source --name github --username TimPaasche --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text https://nuget.pkg.github.com/TimPaasche/index.json
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
