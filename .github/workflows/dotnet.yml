@@ -1,0 +1,33 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Add GitHub public NuGet source
+      run: dotnet nuget add source --name github --username TimPaasche --password ${{ secrets.NUGET_AUTH_TOKEN }} --store-password-in-clear-text https://nuget.pkg.github.com/TimPaasche/index.json
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish --no-build --configuration Release --output ./publish --runtime win-x64 --self-contained true
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: executable
+        path: ./publish
