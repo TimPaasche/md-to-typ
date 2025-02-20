@@ -12,7 +12,7 @@ public class TextElement : MarkdownObject
 public static class TextElementExtensions
 {
     // private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)|:([\d\w_]+?):";
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|([_\*]{3}.+?[_\*]{3})|(\*{2}.+?\*{2}|_{2}.+?_{2})|(\*.+?\*|_.+?_)|(?<!!)(\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|~~(.+?)~~|(!\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|:([\d\w_]+?):";
+    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|([_\*]{3}.+?[_\*]{3})|(\*{2}.+?\*{2}|_{2}.+?_{2})|(\*.+?\*|_.+?_)|(?<!!)(\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|~~(.+?)~~|(!\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|:([\d\w_]+?):|\[\^(\d)\]";
 
     public static TextElement[] ToTextElements(this string line, bool newline = false)
     {
@@ -68,6 +68,11 @@ public static class TextElementExtensions
             else if (!string.IsNullOrEmpty(match.Groups[9].Value))
             {
                 returnObjects.Add(new TextEmoji(match.Groups[9].Value));
+            }
+            // FootNote
+            else if (!string.IsNullOrEmpty(match.Groups[10].Value))
+            {
+                returnObjects.Add(new FootNoteMarker(match.Groups[10].Value));
             }
 
             positionInLine = match.Index + match.Length;

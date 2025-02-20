@@ -11,7 +11,7 @@ public class MarkdownObject
 
 internal static class MarkdownObjectExtension
 {
-    private const string REGEX_PATTERN = @"^(#+\W.*|#+.*)$|^(\*{3}|_{3}|-{3})$|^( *\+ .*$| *\*\W.*| *- .*)$|^( *\d+\. *.*)$|^(\|.*\|)$|^( *\>+.*)$|^(\$\$.*)$|^(```.*)$|^(\[.*\]\(.+\))$|^(\!\[.*\]\(.+\))$";
+    private const string REGEX_PATTERN = @"^(#+\W.*|#+.*)$|^(\*{3}|_{3}|-{3})$|^( *\+ .*$| *\*\W.*| *- .*)$|^( *\d+\. *.*)$|^(\|.*\|)$|^( *\>+.*)$|^(\$\$.*)$|^(```.*)$|^(\[.*\]\(.+\))$|^(\!\[.*\]\(.+\))$|^\[\^(\d)\]:\s*(.*)$";
     
     internal static MarkdownObject Deserialze(this string line, bool newLine = false)
     {
@@ -84,6 +84,11 @@ internal static class MarkdownObjectExtension
             return new Image(line, false);
         }
 
+        // FootNote
+        if (string.IsNullOrEmpty(match.Groups[11].Value) == false)
+        {
+            return new FootNote(line);
+        }
         return new Text(line, newLine);
     }
 }

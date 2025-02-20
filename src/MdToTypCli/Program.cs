@@ -1,7 +1,7 @@
 ﻿using MdToTyp;
 using System.Diagnostics;
 
-namespace CLI;
+namespace MdToTypCli;
 
 using MarkdownClasses;
 
@@ -16,7 +16,8 @@ internal class Program
             //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
             // @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
             @"C:\Repository\md-to-typ\src\Test-Data\md\test.md",    
-            "--pdf"
+            "-o",
+            "C:\\Repository\\md-to-typ\\src\\Test-Data\\typst"
         };
 #endif
 

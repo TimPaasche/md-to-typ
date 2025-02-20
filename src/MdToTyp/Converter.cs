@@ -15,7 +15,7 @@ public static class Converter
         string typst = string.Empty;
         foreach (var item in md.Body)
         {
-            typst += item.ToTypst();
+            typst += item.ToTypst(md);
         }
         return typst;
     }
@@ -31,85 +31,87 @@ public static class Converter
         return template + Environment.NewLine + md.ToTypst();
     }
 
-    public static string ToTypst(this MarkdownObject mdObj) =>
+    public static string ToTypst(this MarkdownObject mdObj, Markdown md) =>
         mdObj switch
         {
-            CodeBlock codeBlock => codeBlock.ToTypst(),
-            EmptyLine emptyLine => emptyLine.ToTypst(),
-            Headline headline => headline.ToTypst(),
-            HorizontalLine horizontalLine => horizontalLine.ToTypst(),
-            HyperRef hyperRef => hyperRef.ToTypst(),
-            Image image => image.ToTypst(),
-            MathBlock mathBlock => mathBlock.ToTypst(),
-            OrderedList orderedList => orderedList.ToTypst(),
-            UnorderedList unorderedList => unorderedList.ToTypst(),
-            Quote quote => quote.ToTypst(),
-            Table table => table.ToTypst(),
-            Text text => text.ToTypst(),
-            TextBold textBold => textBold.ToTypst(),
-            TextItalic textItalic => textItalic.ToTypst(),
-            TextBoldItalic textBoldItalic => textBoldItalic.ToTypst(),
-            TextStrikethrough textStrikethrough => textStrikethrough.ToTypst(),
-            TextEmoji textEmoji => textEmoji.ToTypst(),
-            TextInlineCode textInlineCode => textInlineCode.ToTypst(),
-            TextInlineMath textInlineMath => textInlineMath.ToTypst(),
-            TextNormal textNormal => textNormal.ToTypst(),
+            CodeBlock codeBlock => codeBlock.ToTypst(md),
+            EmptyLine emptyLine => emptyLine.ToTypst(md),
+            Headline headline => headline.ToTypst(md),
+            HorizontalLine horizontalLine => horizontalLine.ToTypst(md),
+            HyperRef hyperRef => hyperRef.ToTypst(md),
+            Image image => image.ToTypst(md),
+            MathBlock mathBlock => mathBlock.ToTypst(md),
+            OrderedList orderedList => orderedList.ToTypst(md),
+            UnorderedList unorderedList => unorderedList.ToTypst(md),
+            Quote quote => quote.ToTypst(md),
+            Table table => table.ToTypst(md),
+            Text text => text.ToTypst(md),
+            TextBold textBold => textBold.ToTypst(md),
+            TextItalic textItalic => textItalic.ToTypst(md),
+            TextBoldItalic textBoldItalic => textBoldItalic.ToTypst(md),
+            TextStrikethrough textStrikethrough => textStrikethrough.ToTypst(md),
+            TextEmoji textEmoji => textEmoji.ToTypst(md),
+            TextInlineCode textInlineCode => textInlineCode.ToTypst(md),
+            TextInlineMath textInlineMath => textInlineMath.ToTypst(md),
+            TextNormal textNormal => textNormal.ToTypst(md),
+            FootNote footNote => footNote.ToTypst(md),
+            FootNoteMarker footNoteMarker => footNoteMarker.ToTypst(md),
             _ => throw new EvaluateException("Unknown MarkdownObject type")
         };
 
 
-    private static string ToTypst(this CodeBlock codeBlock)
+    private static string ToTypst(this CodeBlock codeBlock, Markdown md)
     {
         return $"```{codeBlock.Language}{Environment.NewLine}{codeBlock.Code}{Environment.NewLine}```{Environment.NewLine}";
     }
 
-    private static string ToTypst(this EmptyLine emptyLine)
+    private static string ToTypst(this EmptyLine emptyLine, Markdown md)
     {
         return Environment.NewLine;
     }
 
-    private static string ToTypst(this Headline headline)
+    private static string ToTypst(this Headline headline, Markdown md)
     {
         return $"{new string('=', headline.Level)} {headline.Content}{Environment.NewLine}";
     }
 
-    private static string ToTypst(this HorizontalLine horizontalLine)
+    private static string ToTypst(this HorizontalLine horizontalLine, Markdown md)
     {
         return $"#line(length: 100%){Environment.NewLine}";
     }
 
-    private static string ToTypst(this HyperRef hyperRef)
+    private static string ToTypst(this HyperRef hyperRef, Markdown md)
     {
-        return $"#link(\"{hyperRef.Url}\")[{hyperRef.Alias.ToTypst()}]{Environment.NewLine}";
+        return $"#link(\"{hyperRef.Url}\")[{hyperRef.Alias.ToTypst(md)}]{Environment.NewLine}";
     }
 
-    private static string ToTypst(this Image image)
+    private static string ToTypst(this Image image, Markdown md)
     {
-        return $"#figure(image(alt: \"{image.Alias.ToTypst()}\",\"{image.ImageRefrence}\"), caption: []){Environment.NewLine}";
+        return $"#figure(image(alt: \"{image.Alias.ToTypst(md)}\",\"{image.ImageRefrence}\"), caption: []){Environment.NewLine}";
     }
 
-    private static string ToTypst(this MathBlock mathBlock)
+    private static string ToTypst(this MathBlock mathBlock, Markdown md)
     {
         return $"$ {ConvertTexToTypst(mathBlock.Content.Trim())} $";
     }
 
-    private static string ToTypst(this OrderedList orderedList)
+    private static string ToTypst(this OrderedList orderedList, Markdown md)
     {
-        return $"{new string(' ', orderedList.Indent)}+ {orderedList.Content.ToTypst()}{Environment.NewLine}";
+        return $"{new string(' ', orderedList.Indent)}+ {orderedList.Content.ToTypst(md)}{Environment.NewLine}";
     }
 
-    private static string ToTypst(this UnorderedList unorderedList)
+    private static string ToTypst(this UnorderedList unorderedList, Markdown md)
     {
-        return $"{new string(' ', unorderedList.Indent)}- {unorderedList.Content.ToTypst()}{Environment.NewLine}";
+        return $"{new string(' ', unorderedList.Indent)}- {unorderedList.Content.ToTypst(md)}{Environment.NewLine}";
     }
 
-    private static string ToTypst(this Quote quote)
+    private static string ToTypst(this Quote quote, Markdown md)
     {
         //TODO: Quotes have to be in blocks, but the current implementation is not working pretty
-        return Enumerable.Range(0, quote.NestedDepth).Aggregate(quote.Content.ToTypst().Trim(), (q, ii) => $"#block(fill: luma({240 - (ii * 10)}),inset: 4pt,radius: 1pt,width: 100%,[{q}])") + Environment.NewLine;
+        return Enumerable.Range(0, quote.NestedDepth).Aggregate(quote.Content.ToTypst(md).Trim(), (q, ii) => $"#block(fill: luma({240 - (ii * 10)}),inset: 4pt,radius: 1pt,width: 100%,[{q}])") + Environment.NewLine;
     }
 
-    private static string ToTypst(this Table table)
+    private static string ToTypst(this Table table, Markdown md)
     {
         string tableStr = "#figure(caption: [], table(" + Environment.NewLine;
         tableStr += $"  columns: {table.Width}," + Environment.NewLine;
@@ -123,39 +125,39 @@ public static class Converter
 
         foreach (var cell in table.Cells)
         {
-            tableStr += $"  [{cell.ToTypst()}]," + Environment.NewLine;
+            tableStr += $"  [{cell.ToTypst(md)}]," + Environment.NewLine;
         }
 
         tableStr += $")){Environment.NewLine}";
         return tableStr;
     }
 
-    private static string ToTypst(this Text text)
+    private static string ToTypst(this Text text, Markdown md)
     {
-        return string.Concat(text.Content.Select(obj => obj.ToTypst()));
+        return string.Concat(text.Content.Select(obj => obj.ToTypst(md)));
     }
 
-    private static string ToTypst(this TextBold textBold)
+    private static string ToTypst(this TextBold textBold, Markdown md)
     {
-        return $"*{textBold.Content.ToTypst()}*";
+        return $"*{textBold.Content.ToTypst(md)}*";
     }
 
-    private static string ToTypst(this TextItalic textItalic)
+    private static string ToTypst(this TextItalic textItalic, Markdown md)
     {
-        return $"_{textItalic.Content.ToTypst()}_";
+        return $"_{textItalic.Content.ToTypst(md)}_";
     }
 
-    private static string ToTypst(this TextBoldItalic textBoldItalic)
+    private static string ToTypst(this TextBoldItalic textBoldItalic, Markdown md)
     {
-        return $"_*{textBoldItalic.Content.ToTypst()}*_";
+        return $"_*{textBoldItalic.Content.ToTypst(md)}*_";
     }
 
-    private static string ToTypst(this TextStrikethrough textStrikethrough)
+    private static string ToTypst(this TextStrikethrough textStrikethrough, Markdown md)
     {
-        return $"#strike[{textStrikethrough.Content.ToTypst()}]";
+        return $"#strike[{textStrikethrough.Content.ToTypst(md)}]";
     }
 
-    private static string ToTypst(this TextEmoji textEmoji)
+    private static string ToTypst(this TextEmoji textEmoji, Markdown md)
     {
         string returnStr = string.Empty;
         foreach (var emoji in textEmoji.EmojiUnichar)
@@ -165,21 +167,30 @@ public static class Converter
         return returnStr;
     }
 
-    private static string ToTypst(this TextInlineCode textInlineCode)
+    private static string ToTypst(this TextInlineCode textInlineCode, Markdown md)
     {
         return $"`{textInlineCode.Content}`";
     }
 
-    private static string ToTypst(this TextInlineMath textInlineMath)
+    private static string ToTypst(this TextInlineMath textInlineMath, Markdown md)
     {
         return $"${ConvertTexToTypst(textInlineMath.Content.Trim(' '))}$";
     }
 
-    private static string ToTypst(this TextNormal textNormal)
+    private static string ToTypst(this TextNormal textNormal, Markdown md)
     {
         return textNormal.Content;
     }
 
+    private static string ToTypst(this FootNote footNote, Markdown md)
+    {
+        return $"";
+    }
+    private static string ToTypst(this FootNoteMarker footNoteMarker, Markdown md)
+    {
+        return $"#footnote[{md.FootNotes[footNoteMarker.Number].ToTypst(md)}]";
+    }
+    
     public static string ConvertTexToTypst(string tex)
     {
         return TexToTypstDotNet.TexToTypst.Convert(tex);

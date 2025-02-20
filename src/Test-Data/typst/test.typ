@@ -1,6 +1,7 @@
-= Hello World!
+= Hello World! 
 
-Lorem $f(x)=2x+1$ `dolor` _*sit*_ _*amet*_, _*consetetur*_ _*sadipscing*_ *elitr*, *sed* _diam_ _nonumy_ #link("https://www.google.de")[google]
+Lorem $f(x) = 2 x + 1
+$ `dolor` _*sit*_ _*amet*_, _*consetetur*_ _*sadipscing*_ *elitr*, *sed* _diam_ _nonumy_ #link("https://www.google.de")[google]
  #strike[eirmod]
 
 enum:
@@ -9,15 +10,17 @@ enum:
 - Fuu
 - Waaa
 
-== Hello Europe!
+#line(length: 100%)
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+== Hello Europe! 
+
+Lorem ipsum dolor sit amet #footnote[This is a footnote], consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-=== Hello Germnay!
+=== Hello Germnay! 
 
 some *bold* and some _italic_ text
-
++ 2323
 + Hallo
 + Welt
     + !WAS
@@ -27,15 +30,14 @@ some *bold* and some _italic_ text
 ```md
 ### Hello Germnay!
 
-some **bold** and some *italic* text
+some **bold** and __some__ *italic* text
 ```
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. $3 = 5 - 2$ Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy `print("Hello Ipsum!")` eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, _*consetetur*_ _*sadipscing*_ elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. $3 = 5 -2
+$ Stet _clita_ kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy `print("Hello Ipsum!")` eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\u{1F604}
 
-```latex
-f(x) = \frac {sin(x)}{x}
-```
-
+$ f(x) = frac(s i n(x), x)
+ $
 #figure(caption: [], table(
   columns: 4,
   align: (left,right,center,center),
@@ -44,7 +46,8 @@ f(x) = \frac {sin(x)}{x}
   [Cell 3],
   [Cell 4],
   [`Cell 5`],
-  [Cell 6],
+  [$x = 2 y
+$],
   [Cell 7],
   [Cell 8],
   [Cell 9 blalblalblalb],
@@ -54,5 +57,13 @@ f(x) = \frac {sin(x)}{x}
 ))
 
 
-#block(fill: luma(240),inset: 4pt,radius: 1pt,width: 90%,[bla])
-#block(fill: luma(230),inset: 4pt,radius: 1pt,width: 90%,[#block(fill: luma(240),inset: 4pt,radius: 1pt,width: 90%,[bla bla])])
+#link("https://www.google.de")[#figure(image(alt: "google","google.png"), caption: [])
+]
+
+#figure(image(alt: "- _google_*
+","google.png"), caption: [])
+
+
+#block(fill: luma(240),inset: 4pt,radius: 1pt,width: 100%,[bla])
+#block(fill: luma(230),inset: 4pt,radius: 1pt,width: 100%,[#block(fill: luma(240),inset: 4pt,radius: 1pt,width: 100%,[bla bla])])
+

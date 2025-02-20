@@ -14,7 +14,8 @@ public class Markdown
     public string Title { get; private set; } = "New Markdown Document";
 
     public MarkdownObject[] Body { get; private set; } = [];
-
+    
+    public Dictionary<int, MarkdownObject> FootNotes { get; private set; } = new();
     public Markdown() { }
 
     public Markdown(string title, IEnumerable<string> lines)
@@ -57,7 +58,12 @@ public class Markdown
         GetAllLinesForCodeBlock(lines, ref position, ref line);
         GetAllLinesForTable(lines, ref position, ref line);
         GetAllLinesForMathBlock(lines, ref position, ref line);
-        body.Add(line.Deserialze(newLine: true));
+        var mdObject = line.Deserialze(newLine: true);
+        if (mdObject is FootNote fn)
+        {
+            FootNotes.Add(fn.Number, fn.Content);
+        }
+        body.Add(mdObject);
         position++;
         if (position >= lines.Length)
         {
