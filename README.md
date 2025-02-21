@@ -53,6 +53,7 @@ md-export <input> <flags>
 |  `-t` or `--title`   | Specifies the file name of the export.                                                                                                                    |
 |  `-s` or `--style`   | Specifies the styling template, that should be used for the export.                                                                                       |
 |   `-p` or `--pdf`    | Specifies the output file format. If not provided, the output file will be a `.typ` file. If the flag is provided it will be compiled with typst to pdf.  |
+|   `-i` or `--cach-images`    |  Caches all Images that a refrences a Web URL and downloads them. Overloads the Refrence to the local Refrence	 |
 
 # What is still missing?
 

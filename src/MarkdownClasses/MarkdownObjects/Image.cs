@@ -6,7 +6,7 @@ namespace MarkdownClasses.MarkdownObjects;
 public class Image : TextElement
 {
     private const string REGEX_PATTERN = @"^!\[(.*)\]\((.+)\)$";
-    
+
     public MarkdownObject Alias { get; private set; }
     public string ImageRefrence { get; private set; }
     public bool Inline { get; private set; }
@@ -17,6 +17,13 @@ public class Image : TextElement
 
         this.Alias = match.Groups[1].Value.Deserialze();
         this.ImageRefrence = match.Groups[2].Value;
+        this.Inline = inline;
+    }
+
+    public Image(MarkdownObject alias, string imageRefrence, bool inline = false)
+    {
+        this.Alias = alias;
+        this.ImageRefrence = imageRefrence;
         this.Inline = inline;
     }
 

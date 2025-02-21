@@ -2,9 +2,12 @@
 using MarkdownClasses.MarkdownObjects;
 using MarkdownClasses.MarkdownObjects.TextElements;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MdToTyp;
 
@@ -190,9 +193,41 @@ public static class Converter
     {
         return $"#footnote[{md.FootNotes[footNoteMarker.Number].ToTypst(md)}]";
     }
-    
+
     public static string ConvertTexToTypst(string tex)
     {
         return TexToTypstDotNet.TexToTypst.Convert(tex);
+    }
+
+    public static async Task CacheImagesAsync(this Markdown md, string outputPath)
+    {
+        using var client = new HttpClient();
+
+        Dictionary<Image, Image> imageCache = new();
+        foreach (var image in md.Body.OfType<Image>())
+        {
+            Uri uriResult;
+            if (Uri.TryCreate(image.ImageRefrence, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+            {
+                try
+                {
+                    byte[] imageBytes = await client.GetByteArrayAsync(image.ImageRefrence);
+                    string filePath = Path.Combine(outputPath, Path.GetFileName(image.ImageRefrence)) + ".png";
+                    File.WriteAllBytes(filePath, imageBytes);
+                    imageCache.Add(image, new Image(image.Alias, filePath));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error downloading image: {ex.Message}");
+                }
+            }
+        }
+
+        foreach (var image in imageCache)
+        {
+            int index = Array.IndexOf(md.Body, image.Key);
+            md.Body[index] = image.Value;
+        }
     }
 }

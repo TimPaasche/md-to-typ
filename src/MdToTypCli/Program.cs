@@ -15,17 +15,12 @@ internal class Program
         {
             //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
             // @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
-            @"D:\Repository\md-to-typ\src\Test-Data\md\01-Bestellung.md",    
+            @"D:\Repository\md-to-typ\src\Test-Data\md\test.md",
             "-o",
-            "D:\\Repository\\md-to-typ\\src\\Test-Data\\typst"
+            "D:\\Repository\\md-to-typ\\src\\Test-Data\\typst",
+            "-i"
         };
 #endif
-
-        string input = null;
-        string output = null;
-        string styleTemplate = null;
-        string title = null;
-        bool toPdf = false;
 
         // Check if markdown file is provided
         if (args.Length == 0)
@@ -34,7 +29,7 @@ internal class Program
             return;
         }
 
-        input = args[0];
+        string input = args[0];
 
         // Check if markdown file exists
         if (!File.Exists(input))
@@ -44,18 +39,26 @@ internal class Program
         }
 
         // Check if output directory is provided
-        if (GetOutputFlag()) return;
+        if (GetOutputFlag(args, input, out string output)) return;
 
         // Check if style template is provided
-        if (GetStyleFlag()) return;
+        if (GetStyleFlag(args, out string styleTemplate)) return;
 
         // Check if title is provided
-        if (GetTitleFlag()) return;
+        if (GetTitleFlag(args, input, out string title)) return;
 
         // Check if pdf flag is provided
-        toPdf = GetPdfFlag();
+        bool toPdf = GetPdfFlag(args);
+
+        // Check if cache image flag is provided
+        bool cacheImage = GetCachImageFlag(args);
 
         Markdown md = MarkdownExtensions.Deserialize(input);
+        if (cacheImage)
+        {
+            md.CacheImagesAsync(output).Wait();
+        }
+
         string typst = string.IsNullOrEmpty(styleTemplate)
             ? md.ToTypst()
             : md.ToTypst(styleTemplate);
@@ -75,98 +78,106 @@ internal class Program
         }
 
         ToPdf(typst, file);
-        return;
+    }
 
-        #region Local Functions
-
-        bool GetOutputFlag()
+    private static bool GetOutputFlag(string[] args, string input, out string output)
+    {
+        output = null;
+        if (args.Any(arg => arg == "-o" || arg == "--output"))
         {
-            if (args.Any(arg => arg == "-o" || arg == "--output"))
+            string flag = args.First(arg => arg == "-o" || arg == "--output");
+            int index = Array.IndexOf(args, flag) + 1;
+            if (index < args.Length && !args[index].StartsWith('-'))
             {
-                string flag = args.First(arg => arg == "-o" || arg == "--output");
-                int index = Array.IndexOf(args, flag) + 1;
-                if (index < args.Length && !args[index].StartsWith('-'))
-                {
-                    output = args[index];
-                }
-                else
-                {
-                    Console.WriteLine("Please provide a path to an output directory, like -o <OUTPUT> or --output <OUTPUT>");
-                    return true;
-                }
-                if (Directory.Exists(output) == false)
-                {
-                    Directory.CreateDirectory(output);
-                }
+                output = args[index];
             }
             else
             {
-                output = Path.GetDirectoryName(input);
-            }
-
-            return false;
-        }
-
-        bool GetStyleFlag()
-        {
-            if (args.Any(arg => arg == "-s" || arg == "--style"))
-            {
-                string flag = args.First(arg => arg == "-s" || arg == "--style");
-                int index = Array.IndexOf(args, flag) + 1;
-
-                if (index < args.Length && !args[index].StartsWith('-') && File.Exists(args[index]))
-                {
-                    styleTemplate = args[index];
-                }
-                else
-                {
-                    Console.WriteLine("Please provide a path to a style file, like -s <STYLE-TEMPLATE> or --style <STYLE-TEMPLATE>");
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        bool GetTitleFlag()
-        {
-            if (args.Any(arg => arg == "-t" || arg == "--title"))
-            {
-                string flag = args.First(arg => arg == "-t" || arg == "--title");
-                int index = Array.IndexOf(args, flag) + 1;
-
-                if (index < args.Length && !args[index].StartsWith('-'))
-                {
-                    title = args[index];
-                }
-                else
-                {
-                    Console.WriteLine("Please provide a title, like -t <TITLE> or --title <TITLE>");
-                    return true;
-                }
-                if (title.EndsWith(".typ"))
-                {
-                    title = title.Substring(0, title.Length - 4);
-                }
-            }
-            else
-            {
-                title = Path.GetFileNameWithoutExtension(input);
-            }
-
-            return false;
-        }
-
-        bool GetPdfFlag()
-        {
-            if (args.Any(arg => arg == "-p" || arg == "--pdf"))
-            {
+                Console.WriteLine("Please provide a path to an output directory, like -o <OUTPUT> or --output <OUTPUT>");
                 return true;
             }
-            return false;
+            if (Directory.Exists(output) == false)
+            {
+                Directory.CreateDirectory(output);
+            }
+        }
+        else
+        {
+            output = Path.GetDirectoryName(input);
         }
 
-        #endregion Local Functions
+        return false;
+    }
+
+    private static bool GetStyleFlag(string[] args, out string styleTemplate)
+    {
+        styleTemplate = null;
+        if (args.Any(arg => arg == "-s" || arg == "--style"))
+        {
+            string flag = args.First(arg => arg == "-s" || arg == "--style");
+            int index = Array.IndexOf(args, flag) + 1;
+
+            if (index < args.Length && !args[index].StartsWith('-') && File.Exists(args[index]))
+            {
+                styleTemplate = args[index];
+            }
+            else
+            {
+                Console.WriteLine("Please provide a path to a style file, like -s <STYLE-TEMPLATE> or --style <STYLE-TEMPLATE>");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool GetTitleFlag(string[] args, string input, out string title)
+    {
+        title = null;
+        if (args.Any(arg => arg == "-t" || arg == "--title"))
+        {
+            string flag = args.First(arg => arg == "-t" || arg == "--title");
+            int index = Array.IndexOf(args, flag) + 1;
+
+            if (index < args.Length && !args[index].StartsWith('-'))
+            {
+                title = args[index];
+            }
+            else
+            {
+                Console.WriteLine("Please provide a title, like -t <TITLE> or --title <TITLE>");
+                return true;
+            }
+            if (title.EndsWith(".typ"))
+            {
+                title = title.Substring(0, title.Length - 4);
+            }
+        }
+        else
+        {
+            title = Path.GetFileNameWithoutExtension(input);
+        }
+
+        return false;
+    }
+
+    private static bool GetPdfFlag(string[] args)
+    {
+        if (args.Any(arg => arg == "-p" || arg == "--pdf"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private static bool GetCachImageFlag(string[] args)
+    {
+        if (args.Any(arg => arg == "-i" || arg == "--cache-image"))
+        {
+            return true;
+        }
+        return false;
+
     }
 
     private static void ToPdf(string typst, string file)
