@@ -15,9 +15,9 @@ internal class Program
         {
             //@"C:\Users\DEPAATIM\Desktop\Test\Tex-to-Typst\Test-File.md",
             // @"P:\Masterthesis\Materialien-Liste\Bestellung.md",
-            @"C:\Repository\md-to-typ\src\Test-Data\md\test.md",    
+            @"D:\Repository\md-to-typ\src\Test-Data\md\01-Bestellung.md",    
             "-o",
-            "C:\\Repository\\md-to-typ\\src\\Test-Data\\typst"
+            "D:\\Repository\\md-to-typ\\src\\Test-Data\\typst"
         };
 #endif
 

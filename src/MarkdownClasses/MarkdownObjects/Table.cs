@@ -37,6 +37,7 @@ public class Table : MarkdownObject
 
     private void SetTableCells(string line)
     {
+
         List<Match> matchCells = Regex.Matches(line, REGEX_PATTERN).Cast<Match>().ToList();
         matchCells.RemoveRange(Width, Width);
         this.Count = matchCells.Count;
@@ -51,7 +52,9 @@ public class Table : MarkdownObject
 
     private void SetTableWidthAndAlignment(string line)
     {
-        MatchCollection matchesAllignment = Regex.Matches(line, REGEX_PATTERN_ALIGNMENT_IDENTIFYER);
+        string[] rows = line.Split(Environment.NewLine.ToCharArray());
+        string allinmentRow = rows[1];
+        MatchCollection matchesAllignment = Regex.Matches(allinmentRow, REGEX_PATTERN_ALIGNMENT_IDENTIFYER);
         this.Width = matchesAllignment.Count;
         Alignments = new TableCellAlignment[this.Width];
         for (int ii = 0; ii < this.Width; ii++)
