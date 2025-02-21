@@ -24,8 +24,8 @@ jobs:
       run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish CLI
-      run: dotnet publish src/CLI/CLI.csproj --configuration Release --runtime win-x64 --self-contained true --output ./publish/cli
+    - name: Publish MdToTypCli
+      run: dotnet publish src/MdToTypCli/MdToTypCli.csproj --configuration Release --runtime win-x64 --self-contained true --output ./publish/MdToTypCli
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
