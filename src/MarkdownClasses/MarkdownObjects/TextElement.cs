@@ -12,7 +12,29 @@ public class TextElement : MarkdownObject
 public static class TextElementExtensions
 {
     // private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)|:([\d\w_]+?):";
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|([_\*]{3}.+?[_\*]{3})|(\*{2}.+?\*{2}|_{2}.+?_{2})|(\*.+?\*|_.+?_)|(?<!!)(\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|~~(.+?)~~|(!\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))|:([\d\w_]+?):|\[\^(\d)\]";
+    private const string REGEX_PATTERN = ""
+        // Inline Math
+        + @"\$(.+?)\$" + "|"
+        // Inline Code
+        + @"`(.+?)`" + "|"
+        // Bold + Italic
+        + @"([_\*]{3}.+?[_\*]{3})" + "|"
+        // Bold
+        + @"(\*{2}.+?\*{2}|_{2}.+?_{2})" + "|"
+        // Italic
+        + @"(\*.+?\*|_.+?_)" + "|"
+        // DEPRICATED Link
+        //+ @"(?<!!)(\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))" + "|"
+        // Link
+        + @"(?<!!)(\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([\S]+\))" + "|"
+        // Strikethrough
+        + @"~~(.+?)~~" + "|"
+        // Image
+        + @"(!\[(?:!\[[^\]]*\]\([^\)]+\)|[^\]]+)\]\([^\)]+\))" + "|"
+        // Emoji
+        + @":([\d\w_]+?):" + "|"
+        // FootNote
+        + @"\[\^(\d)\]";
 
     public static TextElement[] ToTextElements(this string line, bool newline = false)
     {
@@ -45,7 +67,7 @@ public static class TextElementExtensions
                 returnObjects.Add(new TextBold(match.Groups[4].Value.Trim(['*', '_'])));
             }
             // Italic
-            else if (!string.IsNullOrEmpty(match.Groups[5].Value) )
+            else if (!string.IsNullOrEmpty(match.Groups[5].Value))
             {
                 returnObjects.Add(new TextItalic(match.Groups[5].Value.Trim(['*', '_'])));
             }

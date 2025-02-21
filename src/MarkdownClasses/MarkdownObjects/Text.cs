@@ -4,7 +4,6 @@ namespace MarkdownClasses.MarkdownObjects;
 
 public class Text : MarkdownObject
 {
-    private const string REGEX_PATTERN = @"\$(.+?)\$|`(.+?)`|\*\*\*(.+?)\*\*\*|___(.+?)___|\*\*_(.+?)_\*\*|__\*(.+?)\*__|\*\*(.+?)\*\*|__(.+?)__|\*(.+?)\*|_(.+?)_|\[(.*?)\]\((.+?)\)|~~(.+?)~~|!\[(.*?)\]\((.+?)\)|:([\d\w_]+?):";
     public TextElement[] Content { get; private set; }
 
 

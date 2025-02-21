@@ -31,15 +31,17 @@ some **bold** and some *italic* text
 some **bold** and __some__ *italic* text
 ```
 
-Lorem ipsum dolor sit amet, __*consetetur*__ ***sadipscing*** elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. $3 = 5 - 2$ Stet _clita_ kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy `print("Hello Ipsum!")` eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.:smile:
+Lorem ipsum dolor sit amet, __*consetetur*__ ***sadipscing*** elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. $3 = 5 - 2$ Stet _clita_ kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy `print("Hello Ipsum!")` eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.:smile: 
+
+hello [:shopping_cart:](https://www.mercateo.com/p/B3953-DEBO(20)KABELSET8/Entwicklerboards_Steckbrueckenkabel_20cm_3x_20_Kabel.html?ViewName=majorcustomer.SEW_DE_OCI_Anzeigemodus_de~hideMyMercateoTab!secureMode) world
 
 $$
 f(x) = \frac {sin(x)}{x}
 $$
 
 | Cell 1               |       **Cell** 2 | Cell 3  | Cell 4  |
-|:---------------------|-:|---------|---------|
-| `Cell 5`             |          $x=2y$ | Cell 7  | Cell 8  |
+| :------------------- | ---------------: | ------- | ------- |
+| `Cell 5`             |           $x=2y$ | Cell 7  | Cell 8  |
 | Cell 9 blalblalblalb | Cell 10 blalblal | Cell 11 | Cell 12 |
 
 
